@@ -91,8 +91,8 @@ kconfig_frag = None
 frag_names = []
 install = False
 publish = True
-url = "http://192.168.1.108:8888/"
-token = "550b7046-a562-49e5-a009-d21d6c601534"
+url = "http://192.168.0.3:8888/"
+token = "4f409440-ffd8-4db3-8458-ae125718607e"
 job = None
 
 # temp frag file: used to collect all kconfig fragments

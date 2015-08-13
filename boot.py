@@ -223,7 +223,7 @@ class acme:
         pass
 
     def cmd(self, cmd):
-        sigrok_cmd = "ssh root@192.168.1.108 sigrok-cli --driver=acme --config probes=%d" %self.probe_id
+        sigrok_cmd = "ssh root@192.168.0.3 sigrok-cli --driver=acme --config probes=%d" %self.probe_id
         if cmd == 'on':
             sigrok_cmd += ":poweron=1"
         elif cmd == 'off':
