@@ -288,6 +288,7 @@ if install:
 
     if os.environ.has_key('INSTALL_PATH'):
         install_path = os.environ['INSTALL_PATH']
+        install_path = os.path.join(install_path, '_install_', git_describe)
         if defconfig:
             install_path = os.path.join(install_path, '-'.join([arch, defconfig]))
         if len(frag_names):
