@@ -286,7 +286,15 @@ if install:
     if len(frag_names):
         install_path += '+' + '+'.join(frag_names)
 
-    os.environ['INSTALL_PATH'] = install_path
+    if os.environ.has_key('INSTALL_PATH'):
+        install_path = os.environ['INSTALL_PATH']
+        if defconfig:
+            install_path = os.path.join(install_path, '-'.join([arch, defconfig]))
+        if len(frag_names):
+            install_path += '+' + '+'.join(frag_names)
+    else:
+        os.environ['INSTALL_PATH'] = install_path
+
     if not os.path.exists(install_path):
         os.makedirs(install_path)
     
