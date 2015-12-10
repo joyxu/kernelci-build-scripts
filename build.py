@@ -91,7 +91,7 @@ kconfig_frag = None
 frag_names = []
 install = False
 publish = True
-url = "http://192.168.0.3:8888/"
+url = "http://172.18.45.13:8888/"
 token = "4f409440-ffd8-4db3-8458-ae125718607e"
 job = None
 

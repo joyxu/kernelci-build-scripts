@@ -30,7 +30,7 @@ done
 
 # Tell the dashboard to import the build.
 echo "Build has now finished, reporting result to dashboard."
-curl -X POST -H "Authorization: 4f409440-ffd8-4db3-8458-ae125718607e" -H "Content-Type: application/json" -d '{"job": "'$TREE_NAME'", "kernel": "'$GIT_DESCRIBE'", "git_branch": "'$BRANCH'", "git_commit": "'$COMMIT_ID'", "git_url": "'$TREE'"  }' http://192.168.0.3:8888/job
+curl -X POST -H "Authorization: 4f409440-ffd8-4db3-8458-ae125718607e" -H "Content-Type: application/json" -d '{"job": "'$TREE_NAME'", "kernel": "'$GIT_DESCRIBE'", "git_branch": "'$BRANCH'", "git_commit": "'$COMMIT_ID'", "git_url": "'$TREE'"  }' http://172.18.45.13:8888/job
 
 # Check if all builds for all architectures have finished. The magic number here is 3 (arm, arm64, x86)
 # This magic number will need to be changed if new architectures are added.
@@ -40,12 +40,12 @@ if [[ BUILDS_FINISHED -eq 3 ]]; then
     if [ "$TREE_NAME" != "next" ] && [ "$TREE_NAME" != "arm-soc" ] && [ "$TREE_NAME" != "mainline" ] && [ "$TREE_NAME" != "stable" ] && [ "$TREE_NAME" != "rmk" ] && [ "$TREE_NAME" != "tegra" ]; then
         # Private Mailing List
         echo "Sending results to private mailing list"
-        curl -X POST -H "Authorization: 4f409440-ffd8-4db3-8458-ae125718607e" -H "Content-Type: application/json" -d '{"job": "'$TREE_NAME'", "kernel": "'$GIT_DESCRIBE'", "build_report": 1, "send_to": ["fellows@kernelci.org"], "format": ["txt", "html"], "delay": 10}' http://192.168.0.3:8888/send
-        curl -X POST -H "Authorization: 4f409440-ffd8-4db3-8458-ae125718607e" -H "Content-Type: application/json" -d '{"job": "'$TREE_NAME'", "kernel": "'$GIT_DESCRIBE'", "boot_report": 1, "send_to": ["fellows@kernelci.org"], "format": ["txt", "html"], "delay": 12600}' http://192.168.0.3:8888/send
+        curl -X POST -H "Authorization: 4f409440-ffd8-4db3-8458-ae125718607e" -H "Content-Type: application/json" -d '{"job": "'$TREE_NAME'", "kernel": "'$GIT_DESCRIBE'", "build_report": 1, "send_to": ["fellows@kernelci.org"], "format": ["txt", "html"], "delay": 10}' http://172.18.45.13:8888/send
+        curl -X POST -H "Authorization: 4f409440-ffd8-4db3-8458-ae125718607e" -H "Content-Type: application/json" -d '{"job": "'$TREE_NAME'", "kernel": "'$GIT_DESCRIBE'", "boot_report": 1, "send_to": ["fellows@kernelci.org"], "format": ["txt", "html"], "delay": 12600}' http://172.18.45.13:8888/send
     else
         # Public Mailing List
         echo "Sending results pubic mailing list"
-        curl -X POST -H "Authorization: 4f409440-ffd8-4db3-8458-ae125718607e" -H "Content-Type: application/json" -d '{"job": "'$TREE_NAME'", "kernel": "'$GIT_DESCRIBE'", "build_report": 1, "send_to": ["kernel-build-reports@lists.linaro.org"], "format": ["txt", "html"], "delay": 10}' http://192.168.0.3:8888/send
-        curl -X POST -H "Authorization: 4f409440-ffd8-4db3-8458-ae125718607e" -H "Content-Type: application/json" -d '{"job": "'$TREE_NAME'", "kernel": "'$GIT_DESCRIBE'", "boot_report": 1, "send_to": ["kernel-build-reports@lists.linaro.org"], "format": ["txt", "html"], "delay": 12600}' http://192.168.0.3:8888/send
+        curl -X POST -H "Authorization: 4f409440-ffd8-4db3-8458-ae125718607e" -H "Content-Type: application/json" -d '{"job": "'$TREE_NAME'", "kernel": "'$GIT_DESCRIBE'", "build_report": 1, "send_to": ["kernel-build-reports@lists.linaro.org"], "format": ["txt", "html"], "delay": 10}' http://172.18.45.13:8888/send
+        curl -X POST -H "Authorization: 4f409440-ffd8-4db3-8458-ae125718607e" -H "Content-Type: application/json" -d '{"job": "'$TREE_NAME'", "kernel": "'$GIT_DESCRIBE'", "boot_report": 1, "send_to": ["kernel-build-reports@lists.linaro.org"], "format": ["txt", "html"], "delay": 12600}' http://172.18.45.13:8888/send
     fi
 fi
